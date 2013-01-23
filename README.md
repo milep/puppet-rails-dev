@@ -81,5 +81,5 @@ Test the rails app by running it
 
 Nginx server is listening in the port 3000 and the upstream server is configured to the port 3030.
 
-Open your browser to the location: http://<your vm ip>:3000 to see if everything is working.
+Open your browser to the location: http://your_vm_ip:3000 to see if everything is working.
 
