@@ -1,7 +1,7 @@
 include common
 
 file {'/etc/nginx/conf':
-  ensure => "directory"
+  ensure => 'directory'
 }
 
 node default {
@@ -13,9 +13,9 @@ node default {
       ]
   }
   nginx::resource::vhost { 'unicorn.dev':
-    ensure   => present,
+    ensure      => present,
     server_name => ['_'],
-    proxy  => 'http://unicorn_server_dev',
+    proxy       => 'http://unicorn_server_dev',
     listen_port => '3000',
   }
   nginx::resource::upstream { 'unicorn_server_prod':
@@ -25,12 +25,12 @@ node default {
       ]
   }
   nginx::resource::vhost { 'unicorn.prod':
-    ensure   => present,
+    ensure      => present,
     server_name => ['_'],
-    www_root => '/home/milep/rails_app/public',
-    try_files => ['$uri', '$uri/index.html', '@unicorn'],
-    location => '@unicorn',
-    proxy  => 'http://unicorn_server_prod',
+    www_root    => '/home/milep/rails_app/public',
+    try_files   => ['$uri', '$uri/index.html', '@unicorn'],
+    location    => '@unicorn',
+    proxy       => 'http://unicorn_server_prod',
     listen_port => '80',
   }
   $my_config = {
@@ -38,17 +38,17 @@ node default {
   }
   nginx::resource::location { 'unicorn.prod.assets':
     location            => '~ ^/(assets)/',
-    www_root => '/home/milep/rails_app/public',
+    www_root            => '/home/milep/rails_app/public',
     vhost               => 'unicorn.prod',
-    index_files => ['index'],
+    index_files         => ['index'],
     location_cfg_append => $my_config,
   }
 
 }
 
-rbenv::install { "milep":
+rbenv::install { 'milep':
 }
 
-rbenv::compile { "1.9.3-p194":
-  user => "milep",
+rbenv::compile { '1.9.3-p194':
+  user => 'milep',
 }
